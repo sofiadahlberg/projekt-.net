@@ -1,0 +1,71 @@
+@model IEnumerable<BookingApp.Models.Treatment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApiKeyRequired)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeInterval)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApiKeyRequired)
+            </td>
+            <td>
+                @if (item.Customer != null)
+    {
+                @Html.DisplayFor(modelItem => item.Customer.Lastname)
+            
+            } else {
+                 <text>N/A</text>
+                } </td>
+            <td>
+                   @if (item.TimeInterval != null)
+    {
+                @Html.DisplayFor(modelItem => item.TimeInterval.TimeIntervalId)
+           
+           } else 
+             {
+        <text>N/A</text>
+    }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TreatmentId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TreatmentId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TreatmentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
